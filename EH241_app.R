@@ -75,7 +75,7 @@ server <- function(input, output, session) {
       IH_effect <- input$IH_effect
       type <- 'Sharps injuries'
       IH_num <- injury_projections[which(injury_projections$injury_type == type),]$number
-      IH_num = replace(IH_num, is.na(IH_num), IH_num[1] * (1-IH_effect)^(seq(1:6)))
+      IH_num <- replace(IH_num, is.na(IH_num), IH_num[1] * (1-IH_effect)^(seq(1:6)))
       injury_projections[which(injury_projections$injury_type == type),]$number <- as.integer(IH_num)
       injury_projections[which(injury_projections$injury_type == type),]$intervention_cost <- c(0, rep(70000,6))
       injury_projections[which(injury_projections$injury_type == type),]$NPV <- round(lag(injury_projections[which(injury_projections$injury_type == type),]$number) * injury_projections[which(injury_projections$injury_type ==type),]$cost_per_injury* IH_effect - injury_projections[which(injury_projections$injury_type == type),]$intervention_cost)
@@ -106,19 +106,19 @@ server <- function(input, output, session) {
     }
 
     ergo_num <- injury_projections[which(injury_projections$injury_type == 'Repetitive motion ergonomic injuries'),]$number
-    ergo_num = replace(ergo_num, is.na(ergo_num), ergo_num[1] * (1-ergo_effect)^(seq(1:6)))
+    ergo_num <- replace(ergo_num, is.na(ergo_num), ergo_num[1] * (1-ergo_effect)^(seq(1:6)))
     injury_projections[which(injury_projections$injury_type == 'Repetitive motion ergonomic injuries'),]$number <- as.integer(ergo_num)
     
     IH_num <- injury_projections[which(injury_projections$injury_type == 'Sharps injuries'),]$number
-    IH_num = replace(IH_num, is.na(IH_num), IH_num[1] * (1-IH_effect)^(seq(1:6)))
+    IH_num <- replace(IH_num, is.na(IH_num), IH_num[1] * (1-IH_effect)^(seq(1:6)))
     injury_projections[which(injury_projections$injury_type == 'Sharps injuries'),]$number <- as.integer(IH_num)
     
     chemical_num <- injury_projections[which(injury_projections$injury_type == 'Chemical injuries'),]$number
-    chemical_num = replace(chemical_num, is.na(chemical_num), chemical_num[1] * chemical_effect^(seq(1:6)))
+    chemical_num <- replace(chemical_num, is.na(chemical_num), chemical_num[1] * chemical_effect^(seq(1:6)))
     injury_projections[which(injury_projections$injury_type == 'Chemical injuries'),]$number <- as.integer(chemical_num)
     
     lifting_num <- injury_projections[which(injury_projections$injury_type == unique(injury_projections$injury_type)[2]),]$number
-    lifting_num = replace(lifting_num, is.na(lifting_num), lifting_num[1] * (1-lifting_effect)^(seq(1:6)))
+    lifting_num <- replace(lifting_num, is.na(lifting_num), lifting_num[1] * (1-lifting_effect)^(seq(1:6)))
     injury_projections[which(injury_projections$injury_type == unique(injury_projections$injury_type)[2]),]$number <- as.integer(lifting_num)
     
     fall_num <- injury_projections[which(injury_projections$injury_type == 'Slips, trips, or falls on the same level'),]$number
